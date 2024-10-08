@@ -1,0 +1,186 @@
+/* עיצוב כללי */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #4b79a1 0%, #283e51 100%);
+    color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* עיצוב הכותרת הראשית */
+h1, h2 {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+/* קונטיינר מרכזי */
+.container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* אנימציה לכפתורים */
+button {
+    padding: 15px 30px;
+    background-color: #4b79a1;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #283e51;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* עיצוב שדות קלט */
+input[type="text"], input[type="password"], input[type="file"], select {
+    padding: 15px;
+    width: 100%;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus, select:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* אנימציות עדינות */
+.container {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* עיצוב רספונסיבי */
+@media screen and (max-width: 768px) {
+    h1, h2 {
+        font-size: 2em;
+    }
+
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    button {
+        font-size: 1em;
+    }
+}
+
+/* אפקט פרלקס */
+.parallax {
+    background-image: url('{{ url_for('static', filename='images/background.jpg') }}');
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: grayscale(20%);
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+    transform: translateY(-50%);
+    transition: transform 0.5s ease;
+}
+
+.container:hover {
+    transform: translateY(-55%);
+}
+
+/* רקע דינמי */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Roboto', sans-serif;
+    color: #f4f4f9;
+}
+
+h1, h2 {
+    font-size: 3em;
+    letter-spacing: 5px;
+}
+
+button {
+    padding: 15px 30px;
+    background-color: #ff8c00;
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #e67e22;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+/* אנימציות גלילה */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeInUp 1s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+    h1, h2 {
+        font-size: 2.5em;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    button {
+        font-size: 1.2em;
+    }
+}
