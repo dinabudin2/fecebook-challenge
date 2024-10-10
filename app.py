@@ -140,28 +140,37 @@ def upload():
 @app.route('/search/<filename>', methods=['GET', 'POST'])
 def job_requirements(filename):
     if request.method == 'POST':
-        # שליחת דרישות עבודה לניתוח
+        # קבלת טקסט הדרישות מהטופס
         job_requirements_text = request.form.get('search')
         if not job_requirements_text:
             return "Missing search text", 400
-        
-        # ניתוח הקובץ
+
+        # בדיקת הקובץ והנתיב
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         if not os.path.exists(file_path):
             return "File not found", 404
 
+        # ניתוח הקובץ
         file_text = analyze_file(file_path)
 
         # חילוץ מידע מועמדים
         candidates_data = extract_candidate_info(file_text)
 
-        # סיווג מועמדים
+        # סיווג מועמדים לפי הדרישות
         passed_candidates, failed_candidates = categorize_candidates([candidates_data], job_requirements_text)
-        print(f"Passed: {passed_candidates}")
-        print(f"Failed: {failed_candidates}")
+
+        # במידה ואין מועמד שעבר, נעדכן רשימה ריקה
+        if not passed_candidates:
+            passed_candidates = []
+
+        # במידה ואין מועמד שנכשל, נעדכן רשימה ריקה ונוסיף את נתיב הקובץ
+        if not failed_candidates:
+            failed_candidates = []
+        for candidate in failed_candidates:
+            candidate['file_path'] = file_path
 
         # הצגת התוצאות בעמוד HTML
-        return render_template('results.html', passed=passed_candidates, failed=failed_candidates)
+        return render_template('results.html', passed=passed_candidates, failed=failed_candidates, filename=filename)
     
     return render_template('search.html', filename=filename)
 

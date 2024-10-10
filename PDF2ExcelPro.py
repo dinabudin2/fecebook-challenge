@@ -13,6 +13,14 @@ def analyze_job_requirements(text):
     requirements = [req.strip() for req in text.split('\n') if req]
     return requirements
 
+def analyze_files(files):
+    results = []
+    for file_path in files:
+        file_content = analyze_file(file_path)
+        result = extract_candidate_info(file_content)
+        results.append(result)
+    return results
+
 # פונקציה לניתוח קובץ מועמד (PDF או DOCX)
 def analyze_file(file_path):
     if file_path.endswith('.pdf'):

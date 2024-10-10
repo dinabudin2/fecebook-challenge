@@ -9,66 +9,55 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 </head>
 <body>
+    <!-- טופס חיפוש -->
+    <form action="/search/{{ filename }}" method="POST">
+        <input type="text" name="search" placeholder="Enter job requirements" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- תיבת תוצאות מרכזית -->
     <div class="results-container">
-        <h1>Search Results</h1>
-    
-        <!-- טבלת מועמדים שעברו -->
-        <h2>Passed Candidates</h2>
-        <table>
+        <h1 class="results-title">Search Results</h1>
+
+        <table id="results-table">
             <thead>
                 <tr>
-                    <th>Job Title</th>
                     <th>Full Name</th>
-                    <th>Phone</th>
                     <th>Email</th>
+                    <th>Phone</th>
+                    <th>Job Title</th>
+                    <th>Uploaded Files</th> <!-- עמודה חדשה לקבצים -->
                 </tr>
             </thead>
             <tbody>
-                {% if passed %}
-                    {% for candidate in passed %}
-                        <tr>
-                            <td>{{ candidate.job_title if candidate.job_title != 'לא נמצא' else 'Not found' }}</td>
-                            <td>{{ candidate.full_name if candidate.full_name != 'לא נמצא' else 'Not found' }}</td>
-                            <td>{{ candidate.phone if candidate.phone != 'לא נמצא' else 'Not found' }}</td>
-                            <td>{{ candidate.email if candidate.email != 'לא נמצא' else 'Not found' }}</td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="4">No candidates passed</td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
-    
-        <!-- טבלת מועמדים שנכשלו -->
-        <h2>Failed Candidates</h2>
-        <table>
-            <thead>
+                {% for candidate in passed %}
                 <tr>
-                    <th>Job Title</th>
-                    <th>Full Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <td>{{ candidate.full_name if candidate.full_name else 'לא נמצא' }}</td>
+                    <td>{{ candidate.email if candidate.email else 'לא נמצא' }}</td>
+                    <td>{{ candidate.phone if candidate.phone else 'לא נמצא' }}</td>
+                    <td>{{ candidate.job_title if candidate.job_title else 'לא נמצא' }}</td>
+                    <td>
+                        <a href="{{ url_for('static', filename=candidate.file_path) }}" target="_blank">Download File</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {% if failed %}
-                    {% for candidate in failed %}
-                        <tr>
-                            <td>{{ candidate.job_title if candidate.job_title != 'לא נמצא' else 'Not found' }}</td>
-                            <td>{{ candidate.full_name if candidate.full_name != 'לא נמצא' else 'Not found' }}</td>
-                            <td>{{ candidate.phone if candidate.phone != 'לא נמצא' else 'Not found' }}</td>
-                            <td>{{ candidate.email if candidate.email != 'לא נמצא' else 'Not found' }}</td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="4">No candidates failed</td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
+                {% endfor %}
+
+                {% for candidate in failed %}
+                <tr>
+                    <td>{{ candidate.full_name if candidate.full_name else 'לא נמצא' }}</td>
+                    <td>{{ candidate.email if candidate.email else 'לא נמצא' }}</td>
+                    <td>{{ candidate.phone if candidate.phone else 'לא נמצא' }}</td>
+                    <td>{{ candidate.job_title if candidate.job_title else 'לא נמצא' }}</td>
+                    <td>
+                      <a href="{{ url_for('static', filename=candidate.file_path) }}" target="_blank">Download File</a>
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
+
+        <!-- כפתור חזרה לחיפוש -->
+        <button class="back-btn" onclick="window.location.href='/search'">Return to Search</button>
     </div>
     
     <script src="/static/js/results.js"></script>
