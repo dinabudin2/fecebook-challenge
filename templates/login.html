@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Login - High-Tech</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/stylelogin.css">
 </head>
 <body>
-    <div class="container">
+
+    <!-- גרפיקה מתקדמת ברקע -->
+    <div class="background-graphic"></div>
+
+    <div class="login-container">
         <h2>Login</h2>
-        <form method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+        <form action="/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+        
             <button type="submit">Login</button>
-        </form>
+              <!-- אזור הצגת שגיאה -->
+    {% if error %}
+    <div class="error-message" style="color:red;">
+        {{ error }}
     </div>
+{% endif %}
+        </form>
+        
+        <div class="social-btns">
+            <button class="social-btn" id="google-btn">Google</button>
+            <button class="social-btn" id="facebook-btn">Facebook</button>
+        </div>
+    </div>
+
+    <script src="/static/js/login.js"></script>
 </body>
 </html>

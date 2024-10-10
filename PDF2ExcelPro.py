@@ -1,123 +1,88 @@
-import pdfplumber
-import pandas as pd
-import os
+import re
+from PyPDF2 import PdfReader
+from docx import Document
 
-def extract_text_from_pdf(pdf_path):
-    """
-    מחלץ טקסט מקובץ PDF.
-    
-    pdf_path: הנתיב לקובץ ה-PDF.
-    """
-    text_data = []
-    try:
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                text = page.extract_text()
-                if text:
-                    lines = text.split('\n')
-                    text_data.extend(lines)
-        return text_data
-    
-    except Exception as e:
-        print(f"Error extracting text: {e}")
-        return None
+# פונקציה לקליטת קובץ מהמשתמש ושמירתו בתיקייה ייעודית
+def save_file(file, upload_folder):
+    file_path = os.path.join(upload_folder, file.filename)
+    file.save(file_path)
+    return file_path
 
-def extract_tables_from_pdf(pdf_path):
-    """
-    מחלץ טבלאות מקובץ PDF.
-    
-    pdf_path: הנתיב לקובץ ה-PDF.
-    """
-    tables_data = []
-    try:
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                tables_on_page = page.extract_tables()
-                for table in tables_on_page:
-                    tables_data.append(table)
-        return tables_data
-    
-    except Exception as e:
-        print(f"Error extracting tables: {e}")
-        return None
+# פונקציה לניתוח דרישות המשרה (קבלת טקסט חופשי)
+def analyze_job_requirements(text):
+    requirements = [req.strip() for req in text.split('\n') if req]
+    return requirements
 
-def get_user_conversion_choice():
-    print("Select the type of conversion you want:")
-    print("1. Convert PDF to Text")
-    print("2. Convert PDF to Tables")
-    choice = input("Enter the number of your choice: ")
-    return choice
-
-def get_output_file_type():
-    print("Select the type of output file you want:")
-    print("1. Excel (.xlsx)")
-    print("2. CSV (.csv)")
-    print("3. JSON (.json)")
-    file_type = input("Enter the number of your choice: ")
-    return file_type
-
-def save_to_file(data, file_type, file_name):
-    """
-    שומר את הנתונים לקובץ לפי סוג הקובץ שנבחר.
-    """
-    if file_type == '1':  # Excel
-        df = pd.DataFrame(data)
-        df.to_excel(file_name, index=False)
-        print(f"Data saved to {file_name} as Excel file.")
-    elif file_type == '2':  # CSV
-        df = pd.DataFrame(data)
-        df.to_csv(file_name, index=False)
-        print(f"Data saved to {file_name} as CSV file.")
-    elif file_type == '3':  # JSON
-        with open(file_name, 'w') as f:
-            import json
-            json.dump(data, f)
-        print(f"Data saved to {file_name} as JSON file.")
+# פונקציה לניתוח קובץ מועמד (PDF או DOCX)
+def analyze_file(file_path):
+    if file_path.endswith('.pdf'):
+        return extract_text_from_pdf(file_path)
+    elif file_path.endswith('.docx'):
+        return extract_text_from_docx(file_path)
     else:
-        print("Invalid file type chosen.")
+        return ""
 
-def pdf_to_excel_pro(pdf_path, file_name, conversion_choice):
-    """
-    מבצע המרה של PDF לפי הבחירה של המשתמש (טקסט או טבלאות) ומבצע עיבוד בהתאם.
+# פונקציה להוצאת טקסט מקובץ PDF
+def extract_text_from_pdf(file_path):
+    text = ""
+    with open(file_path, 'rb') as f:
+        reader = PdfReader(f)
+        for page in reader.pages:
+            text += page.extract_text()
+    return text
+
+# פונקציה להוצאת טקסט מקובץ DOCX
+def extract_text_from_docx(file_path):
+    doc = Document(file_path)
+    return "\n".join([para.text for para in doc.paragraphs])
+
+# פונקציה להוצאת המידע מהמועמד (כותרת משרה, שם מלא, טלפון, מייל)
+def extract_candidate_info(text):
+    job_title = extract_job_title(text)
+    full_name = extract_full_name(text)
+    phone = extract_phone(text)
+    email = extract_email(text)
+    return {'job_title': job_title, 'full_name': full_name, 'phone': phone, 'email': email}
+
+# פונקציה לזיהוי כותרת המשרה
+def extract_job_title(text):
+    # לוגיקה לזיהוי כותרת המשרה מתוך הטקסט (לדוגמה, חיפוש מילות מפתח או דפוסים)
+    job_title_match = re.search(r'(?i)job title:\s*(.*)', text)
+    return job_title_match.group(1) if job_title_match else "לא נמצא"
+
+# פונקציה לזיהוי שם מלא
+def extract_full_name(text):
+    # לוגיקה לזיהוי שם מלא מתוך הטקסט
+    name_match = re.search(r'(?i)name:\s*(.*)', text)
+    return name_match.group(1) if name_match else "לא נמצא"
+
+# פונקציה לזיהוי מספר טלפון
+def extract_phone(text):
+    phone_match = re.search(r'\b\d{2,3}-?\d{7,8}\b', text)
+    return phone_match.group() if phone_match else "לא נמצא"
+
+# פונקציה לזיהוי מייל
+def extract_email(text):
+    email_match = re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text)
+    return email_match.group() if email_match else "לא נמצא"
+
+# פונקציה לסיווג מועמדים - מי עמד בדרישות המשרה ומי לא
+def categorize_candidates(candidates, requirements):
+    passed = []
+    failed = []
+
+    for candidate in candidates:
+        if meets_requirements(candidate, requirements):
+            passed.append(candidate)
+        else:
+            failed.append(candidate)
     
-    pdf_path: הנתיב לקובץ ה-PDF.
-    file_name: שם קובץ הפלט שיווצר.
-    conversion_choice: הבחירה של המשתמש לגבי סוג ההמרה.
-    """
-    if conversion_choice == '1':  # המרת PDF לטקסט
-        text_data = extract_text_from_pdf(pdf_path)
-        if text_data is None:
-            print("Failed to extract text from PDF.")
-            return
-        save_to_file(text_data, '1', file_name)  # שמירת טקסט
-    
-    elif conversion_choice == '2':  # המרת PDF לטבלאות
-        tables_data = extract_tables_from_pdf(pdf_path)
-        if tables_data is None or len(tables_data) == 0:
-            print("No tables found in PDF.")
-            return
-        save_to_file(tables_data, '1', file_name)  # שמירת טבלאות
+    return passed, failed
 
-# דוגמה לשימוש:
-pdf_file = input("Please enter the path to the PDF file: ")
-output_file = input("Please enter the desired name for the output file (without extension): ")
-
-# בדיקת סוג ההמרה שהמשתמש רוצה לבצע
-conversion_choice = get_user_conversion_choice()
-
-# בדיקת סוג קובץ הפלט שהמשתמש רוצה
-file_type = get_output_file_type()
-
-# שמירת קובץ ה-Excel/CSV/JSON
-if file_type == '1':
-    file_name = f"{output_file}.xlsx"
-elif file_type == '2':
-    file_name = f"{output_file}.csv"
-elif file_type == '3':
-    file_name = f"{output_file}.json"
-else:
-    print("Invalid file type chosen.")
-    file_name = f"{output_file}.xlsx"
-
-# קריאה לפונקציה עם הפרמטרים
-pdf_to_excel_pro(pdf_file, file_name, conversion_choice)
+# פונקציה לבדיקת התאמת המועמד לדרישות המשרה
+def meets_requirements(candidate, requirements):
+    # נניח שהמועמד עומד בדרישות אם כותרת המשרה או שם המועמד תואמים לדרישות
+    for req in requirements:
+        if req.lower() in candidate['job_title'].lower() or req.lower() in candidate['full_name'].lower():
+            return True
+    return False

@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload PDF for Conversion</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Upload Your Files</title>
+    <link rel="stylesheet" href="/static/css/uplod.css">
+    <link rel="stylesheet" href="/static/css/styleupload.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Upload PDF and Choose Conversion</h2>
-        <form action="/convert" method="POST" enctype="multipart/form-data">
-            <label for="file">Select PDF file:</label>
-            <input type="file" id="file" name="file" accept=".pdf" required>
-            
-            <label for="conversion">Choose Conversion Type:</label>
-            <select id="conversion" name="conversion">
-                <option value="text">Convert to Text</option>
-                <option value="tables">Convert to Tables</option>
-            </select>
-            
-            <label for="format">Choose Output Format:</label>
-            <select id="format" name="format">
-                <option value="xlsx">Excel (.xlsx)</option>
-                <option value="csv">CSV (.csv)</option>
-                <option value="json">JSON (.json)</option>
-            </select>
 
-            <button type="submit">Convert</button>
+    <!-- רקע דינמי עם גרפיקה מתקדמת -->
+    <div class="background-animation"></div>
+
+    <!-- תיבת העלאה מרכזית -->
+    <div class="upload-container">
+        <h1 class="upload-title">Upload Your Files</h1>
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="files">Choose a file:</label>
+            <input type="file" id="fileUpload" name="files" required multiple>
+            <button type="submit" class="upload-btn">Upload</button>
         </form>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
     </div>
+
+    <script src="/static/js/uplod.js"></script>
 </body>
 </html>

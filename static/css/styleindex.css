@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* עיצוב רקע דינמי עם אפקט חלקיקים */
+body {
+    @apply bg-gray-900 flex items-center justify-center min-h-screen;
+    background: radial-gradient(circle at center, #000000, #1c1c1e);
+    overflow: hidden;
+}
+
+/* אנימציה של רקע חלקיקים */
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/TAc6.gif') center/cover no-repeat;
+    opacity: 0.2;
+}
+
+/* תיבת התוכן המרכזית */
+.content-container {
+    @apply bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-xl p-10 text-center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* כותרת ראשית */
+.main-title {
+    position: relative;
+    font-size: 4rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    text-shadow: 0 0 20px #00d1ff, 0 0 30px #00d1ff;
+    margin-bottom: 20px;
+}
+
+/* טקסט הקדמה */
+.intro-text {
+    @apply text-gray-300 text-lg mb-8;
+}
+
+/* כפתור קריאה לפעולה */
+.cta-button {
+    @apply bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out;
+    box-shadow: 0px 0px 15px rgba(0, 100, 255, 0.5);
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #0093E9 0%, #80D0C7 100%);
+}

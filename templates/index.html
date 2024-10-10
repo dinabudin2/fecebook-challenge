@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF2ExcelPro - Unique Design</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Welcome to Our Platform</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/styleindex.css">
 </head>
 <body>
-    <div class="parallax"></div>
-    <div class="container">
-        <h1>Innovative PDF to Excel Converter</h1>
-        <p><a href="/login">Login</a> or <a href="/register">Register</a> to start converting!</p>
-        <button>Start Now</button>
+
+    <!-- רקע דינמי -->
+    <div class="background-animation"></div>
+
+    <!-- תיבת תוכן מרכזית -->
+    <div class="content-container">
+        <h1 class="main-title">Welcome to the Future</h1>
+        <p class="intro-text">Join us in building the most advanced platform.</p>
+        <a href="{{ url_for('login') }}" class="cta-button">Login</a>
+        <a href="{{ url_for('register') }}" class="cta-button">Register</a>
     </div>
+
+    <script src="/static/js/index.js"></script>
 </body>
 </html>
-

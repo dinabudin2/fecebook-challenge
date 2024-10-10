@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/static/css/results.css">
+    <link rel="stylesheet" href="/static/css/styleresults.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+</head>
+<body>
+    <div class="results-container">
+        <h1>Search Results</h1>
+    
+        <!-- טבלת מועמדים שעברו -->
+        <h2>Passed Candidates</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Full Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if passed %}
+                    {% for candidate in passed %}
+                        <tr>
+                            <td>{{ candidate.job_title if candidate.job_title != 'לא נמצא' else 'Not found' }}</td>
+                            <td>{{ candidate.full_name if candidate.full_name != 'לא נמצא' else 'Not found' }}</td>
+                            <td>{{ candidate.phone if candidate.phone != 'לא נמצא' else 'Not found' }}</td>
+                            <td>{{ candidate.email if candidate.email != 'לא נמצא' else 'Not found' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">No candidates passed</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    
+        <!-- טבלת מועמדים שנכשלו -->
+        <h2>Failed Candidates</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Full Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if failed %}
+                    {% for candidate in failed %}
+                        <tr>
+                            <td>{{ candidate.job_title if candidate.job_title != 'לא נמצא' else 'Not found' }}</td>
+                            <td>{{ candidate.full_name if candidate.full_name != 'לא נמצא' else 'Not found' }}</td>
+                            <td>{{ candidate.phone if candidate.phone != 'לא נמצא' else 'Not found' }}</td>
+                            <td>{{ candidate.email if candidate.email != 'לא נמצא' else 'Not found' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">No candidates failed</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="/static/js/results.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* רקע עם גרפיקה מרשימה */
+body {
+    @apply bg-gray-900 flex items-center justify-center min-h-screen;
+    background: radial-gradient(circle, #000000, #002233);
+    overflow: hidden;
+}
+
+/* גרפיקה ברקע */
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/QoBc.gif') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* תיבת ההעלאה */
+.upload-container {
+    @apply bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-xl p-10 text-center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    width: 400px;
+}
+
+/* כותרת ההעלאה */
+.upload-title {
+    @apply text-white text-3xl font-semibold mb-6;
+}
+
+/* שדות ההעלאה */
+label {
+    @apply text-gray-300 text-lg font-semibold;
+}
+
+input[type="file"] {
+    @apply w-full text-white p-3 mt-4 mb-4 bg-white bg-opacity-20 border-none rounded-lg focus:outline-none;
+}
+
+/* כפתור העלאה */
+.upload-btn {
+    @apply w-full p-3 bg-blue-500 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 ease-in-out;
+    box-shadow: 0px 0px 15px rgba(0, 100, 255, 0.5);
+}
+
+.upload-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #0093E9 0%, #80D0C7 100%);
+}
+
+/* בר התקדמות */
+.progress-bar {
+    @apply w-full h-2 mt-6 bg-gray-700 rounded-lg;
+}
+
+.progress-fill {
+    @apply h-full bg-green-500 rounded-lg transition-all duration-300 ease-in-out;
+    width: 0%;
+}

@@ -1,0 +1,40 @@
+/* עיצוב הכותרת עם אפקט ניאון */
+h2 {
+    position: relative;
+    font-size: 3rem;
+    color: #00d1ff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 209, 255, 0.5), rgba(0, 0, 255, 0.5));
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.6;
+    border-radius: 10px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(0, 209, 255, 0.5);
+    border-radius: 10px;
+    z-index: 0;
+}

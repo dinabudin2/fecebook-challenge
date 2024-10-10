@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@angular/cli": "^18.2.7",
+    "@angular/core": "^18.2.7",
+    "animejs": "^3.2.2",
+    "framer-motion": "^11.11.4",
+    "gsap": "^3.12.5",
+    "lottie-react": "^2.4.0",
+    "lottie-web": "^5.12.2",
+    "p5": "^1.11.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "vue": "^3.5.11"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}
