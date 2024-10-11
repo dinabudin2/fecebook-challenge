@@ -40,5 +40,5 @@ Make sure you have the following installed on your system:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/dinabudin2/fecebook-challenge--gil-gvirts.git
-   cd fecebook-challenge--gil-gvirts
+   git clone https://github.com/dinabudin2/fecebook-challenge.git
+   cd fecebook-challenge
