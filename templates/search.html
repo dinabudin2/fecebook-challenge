@@ -9,27 +9,25 @@
 </head>
 <body>
 
-    <!-- רקע דינמי -->
+
     <div class="background-animation"></div>
 
-    <!-- תיבת חיפוש מרכזית -->
+
     <div class="search-container">
         <h1 class="search-title">Search Resumes</h1>
-        <!-- שימוש בשורת ה-POST החייבת -->
+
         <form action="/search/{{ filename }}" method="POST">
             <input type="text" name="search" placeholder="Enter job requirements" required>
-            <button type="submit">Submit</button>
+            <button type="submit">Submit</button>a
         </form>
-        
+    
 
-        <!-- אנימציית טעינת תוצאות -->
         <div id="loadingAnimation" class="loading-animation" style="display: none;">
             <p>Searching...</p>
             <div class="loading-spinner"></div>
         </div>
         
 
-        <!-- תוצאות חיפוש -->
         <div id="searchResults" class="search-results"></div>
     </div>
 

@@ -1,4 +1,4 @@
-/* עיצוב הכותרת עם אפקט ניאון */
+
 h2 {
     position: relative;
     font-size: 3rem;
@@ -37,4 +37,18 @@ h2::after {
     border: 2px solid rgba(0, 209, 255, 0.5);
     border-radius: 10px;
     z-index: 0;
+}
+
+.button-login {
+    background-color: #51d0bd; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
 }

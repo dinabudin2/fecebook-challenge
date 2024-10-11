@@ -11,7 +11,7 @@ document.getElementById('job-form').addEventListener('submit', function(event) {
     const errorMessage = document.getElementById('error-message');
     
     if (!requirements.trim()) {
-        event.preventDefault();  // מניעת שליחת הטופס אם אין דרישות
+        event.preventDefault();   
         errorMessage.classList.remove('hidden');
     } else {
         errorMessage.classList.add('hidden');
@@ -19,23 +19,23 @@ document.getElementById('job-form').addEventListener('submit', function(event) {
 });
 
 
-// הנפשת תיבת החיפוש בעת טעינת הדף
+ 
 window.onload = () => {
     gsap.from(".search-container", { duration: 1.5, opacity: 0, y: 50, ease: "power2.out" });
 };
 
-// טיפול בטופס החיפוש והצגת אנימציית הטעינה
+ 
 document.getElementById('searchForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // ביטול פעולת ברירת המחדל כדי להציג את ההנפשה
+    e.preventDefault();  
 
-    // הצגת אנימציית הטעינה
+     
     const loadingAnimation = document.getElementById('loadingAnimation');
     loadingAnimation.style.display = 'block';
 
-    // הדמיית זמן חיפוש
+     
     setTimeout(() => {
-        loadingAnimation.style.display = 'none'; // הסתרת הטעינה לאחר החיפוש
-        displayResults(); // הצגת התוצאות
-    }, 2000); // זמן לדוגמה של 2 שניות לחיפוש
+        loadingAnimation.style.display = 'none';  
+        displayResults();  
+    }, 2000);  
 });
 

@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* עיצוב רקע מתקדם */
+ 
 body {
     @apply bg-gray-900 flex items-center justify-center min-h-screen;
     background: radial-gradient(circle, rgba(0, 0, 50, 0.9), rgba(0, 0, 80, 0.8));
     overflow: hidden;
 }
 
-/* תיבת התוצאות */
+ 
 .results-container {
     @apply bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-xl p-10 text-center;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -18,17 +18,17 @@ body {
     width: 85%;
 }
 
-/* כותרת התוצאות */
+ 
 .results-title {
     @apply text-white text-3xl font-semibold mb-6;
 }
 
-/* סגנון התוצאות */
+ 
 .results-area {
     @apply text-white text-left mt-6;
 }
 
-/* עיצוב שורות התוצאות */
+ 
 .result-row {
     @apply p-4 border-b border-gray-700 flex justify-between;
     transition: background-color 0.3s ease;
@@ -38,7 +38,7 @@ body {
     background-color: rgba(0, 255, 100, 0.2);
 }
 
-/* כפתור חזרה */
+ 
 .back-btn {
     @apply w-full p-3 bg-blue-500 text-white font-semibold rounded-lg shadow-lg mt-8 transition-all duration-300 ease-in-out;
     box-shadow: 0px 0px 15px rgba(0, 100, 255, 0.5);
@@ -48,3 +48,45 @@ body {
     transform: scale(1.05);
     background: linear-gradient(135deg, #0093E9 0%, #80D0C7 100%);
 }
+
+ 
+input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+ 
+input[type="text"]:focus {
+    border-color: #3498db;
+}
+
+ 
+.button-submit {
+    background-color: #3498db; 
+    border: none;
+    color: white;  
+    padding: 12px 24px;  
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 8px 0;
+    cursor: pointer;
+    border-radius: 25px;  
+    transition: background-color 0.3s ease, transform 0.3s ease;  
+}
+
+ 
+.button-submit:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);  
+}
+
+

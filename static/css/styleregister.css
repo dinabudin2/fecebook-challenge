@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* רקע מתקדם עם קווים מתוחכמים */
+
 body {
     @apply bg-gray-900 flex items-center justify-center min-h-screen;
     background: radial-gradient(circle at center, #000000, #001f3f);
     overflow: hidden;
 }
 
-/* גרפיקה טכנולוגית ברקע */
+
 .background-graphic {
     position: absolute;
     top: 0;
@@ -20,7 +20,7 @@ body {
     opacity: 0.2;
 }
 
-/* תיבת ההרשמה */
+
 .register-container {
     @apply bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg p-10;
     width: 400px;
@@ -28,7 +28,7 @@ body {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* עיצוב הכותרת */
+
 h2 {
     position: relative;
     font-size: 2.5rem;
@@ -40,7 +40,7 @@ h2 {
     font-weight: bold;
 }
 
-/* שדות הטופס */
+
 label {
     @apply text-gray-300 font-semibold;
 }
@@ -49,7 +49,7 @@ input {
     @apply w-full p-3 mb-4 bg-white bg-opacity-20 text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500;
 }
 
-/* כפתור ההרשמה */
+
 .register-btn {
     @apply w-full p-3 bg-green-500 text-white font-semibold rounded-lg shadow-lg mt-4 transition-all duration-300 ease-in-out;
     box-shadow: 0px 0px 15px rgba(0, 255, 100, 0.5);
